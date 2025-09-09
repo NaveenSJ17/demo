@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven-3.9.11'   // match the Maven tool name in Jenkins
+        maven 'Maven-3.9.11'
     }
 
     stages {
@@ -14,25 +14,25 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn clean install'
+                dir('bookmydoctor/bookmydoctor') {
+                    bat 'mvn clean install'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                dir('bookmydoctor/bookmydoctor') {
+                    bat 'mvn test'
+                }
             }
         }
 
         stage('Package') {
             steps {
-                bat 'mvn package'
-            }
-        }
-
-        stage('Deploy to Staging') {
-            steps {
-                bat 'copy target\\app.jar C:\\deployments\\app.jar'
+                dir('bookmydoctor/bookmydoctor') {
+                    bat 'mvn package'
+                }
             }
         }
     }
