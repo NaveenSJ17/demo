@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        maven 'Maven-3.9.9'   // Must match the name you gave in Jenkins tool config
+    }
 
     stages {
         stage('Checkout Code') {
@@ -10,26 +13,19 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn clean install'
+                sh 'mvn clean install'
             }
         }
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                sh 'mvn test'
             }
         }
 
         stage('Package') {
             steps {
-                bat 'mvn package'
-            }
-        }
-
-        stage('Deploy to Staging') {
-            steps {
-                // Example for Windows deploy (skip scp/ssh unless you have them installed)
-                echo 'Deployment step (customize for your environment)'
+                sh 'mvn package'
             }
         }
     }
