@@ -1,7 +1,8 @@
 pipeline {
     agent any
+
     tools {
-        maven 'Maven-3.9.11'    // Must match the name you gave in Jenkins tool config
+        maven 'Maven-3.9.11'   // match the Maven tool name in Jenkins
     }
 
     stages {
@@ -13,29 +14,24 @@ pipeline {
 
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                bat 'mvn clean install'
             }
         }
 
         stage('Test') {
             steps {
-                sh 'mvn test'
+                bat 'mvn test'
             }
         }
 
         stage('Package') {
             steps {
-                sh 'mvn package'
+                bat 'mvn package'
             }
         }
-    }
 
-    post {
-        success {
-            echo 'Pipeline executed successfully!'
-        }
-        failure {
-            echo 'Pipeline failed. Please check logs!'
-        }
-    }
-}
+        stage('Deploy to Staging') {
+            steps {
+                // Example for Windows (adjust as per your env)
+                bat 'copy target\\app.jar C:\\deployments\\app.jar'
+                // If deploying to remote server, you’d use WinSC
