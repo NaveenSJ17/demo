@@ -14,7 +14,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                dir('bookmydoctor/bookmydoctor') {
+                dir('bookmydoctor') {
                     bat 'mvn clean install'
                 }
             }
@@ -22,7 +22,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                dir('bookmydoctor/bookmydoctor') {
+                dir('bookmydoctor') {
                     bat 'mvn test'
                 }
             }
@@ -30,7 +30,7 @@ pipeline {
 
         stage('Package') {
             steps {
-                dir('bookmydoctor/bookmydoctor') {
+                dir('bookmydoctor') {
                     bat 'mvn package'
                 }
             }
