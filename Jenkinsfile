@@ -32,6 +32,17 @@ pipeline {
 
         stage('Deploy to Staging') {
             steps {
-                // Example for Windows (adjust as per your env)
                 bat 'copy target\\app.jar C:\\deployments\\app.jar'
-                // If deploying to remote server, you’d use WinSC
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed. Please check logs!'
+        }
+    }
+}
