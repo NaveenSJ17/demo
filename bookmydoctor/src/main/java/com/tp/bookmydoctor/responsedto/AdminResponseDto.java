@@ -11,4 +11,6 @@ public class AdminResponseDto {
 
 	private String password;
 
+	private String age :
+
 }
